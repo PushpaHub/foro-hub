@@ -1,4 +1,4 @@
-package com.ananda.forohub.domain;
+package com.ananda.forohub.domain.topico;
 
 public enum Curso {
 

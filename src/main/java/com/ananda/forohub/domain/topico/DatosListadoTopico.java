@@ -1,4 +1,4 @@
-package com.ananda.forohub.domain;
+package com.ananda.forohub.domain.topico;
 
 public record DatosListadoTopico(Long id, String titulo, String mensaje,
                                  String fecha, String estatus,

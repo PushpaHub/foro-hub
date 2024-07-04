@@ -1,8 +1,7 @@
 package com.ananda.forohub.controller;
 
-import com.ananda.forohub.domain.*;
+import com.ananda.forohub.domain.topico.*;
 import jakarta.validation.Valid;
-import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-
-import static org.hibernate.query.SortDirection.ASCENDING;
 
 @RestController
 @RequestMapping("/topicos")
