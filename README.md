@@ -122,6 +122,7 @@ Para probar o usar la aplicación se requeiere seguir los siguientes pasos:
 
 ## Tecnologías usadas
 - Java SE17
+- Spring Boot v.3.0.2
 - IDE IntelliJ
 - Cliente de API Insomnia
 - MySQL de Oracle
