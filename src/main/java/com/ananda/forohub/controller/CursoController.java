@@ -6,6 +6,7 @@ import com.ananda.forohub.domain.curso.DatosRegistroCurso;
 import com.ananda.forohub.domain.curso.DatosRespuestaCurso;
 import com.ananda.forohub.domain.curso.*;
 import com.ananda.forohub.infra.errores.ValidationDeDatosIngresados;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/cursos")
+@SecurityRequirement(name = "bearer-key")
 public class CursoController {
 
     @Autowired

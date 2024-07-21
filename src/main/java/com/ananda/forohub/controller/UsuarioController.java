@@ -3,6 +3,7 @@ package com.ananda.forohub.controller;
 import com.ananda.forohub.domain.perfil.DatosActualizarPerfil;
 import com.ananda.forohub.domain.perfil.DatosActualizarPerfilesDelUsuario;
 import com.ananda.forohub.domain.usuario.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuarios")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
 
     @Autowired
