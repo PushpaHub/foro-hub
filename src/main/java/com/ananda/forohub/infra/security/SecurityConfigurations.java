@@ -28,8 +28,9 @@ public class SecurityConfigurations {
         return httpSecurity.csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // le indicamos a String el tipo de sesión
                 .and().authorizeRequests()
-                .requestMatchers(HttpMethod.POST, "/login")
-                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers("/usuarios/inscripcion").permitAll()
+                .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

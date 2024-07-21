@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,50 +18,60 @@ import java.net.URI;
 public class TopicoController {
 
     @Autowired
+    private TopicoService topicoService;
+    @Autowired
     private TopicoRepository topicoRepository;
 
+
     @PostMapping
-    public ResponseEntity<DatosRespuestaTopico> registrarTopico
+    @Transactional
+    // Registrar un nuevo tópico, abierto a todos
+    public ResponseEntity registrarTopico
             (@RequestBody @Valid DatosRegistroTopico datosRegistroTopico,
-             UriComponentsBuilder uriComponentsBuilder) {
-        Topico topico = topicoRepository.save(new Topico(datosRegistroTopico));
-        DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(topico);
-        URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-        return ResponseEntity.created(url).body(datosRespuestaTopico);
+             UriComponentsBuilder uriComponentsBuilder){
+
+        var response = topicoService.registrar(datosRegistroTopico);
+        URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(response.id()).toUri();
+        return ResponseEntity.created(url).body(response);
     }
 
     @GetMapping
+    // Listar tópicos, permitido a todos los perfiles
     public ResponseEntity<Page<DatosListadoTopico>> listadoTopicos
-            (@PageableDefault(size = 10, sort = "fecha", direction = Sort.Direction.ASC)
-             Pageable paginacion) {
-        return ResponseEntity.ok(topicoRepository.findAll(paginacion)
-                .map(DatosListadoTopico::new));
+            (@PageableDefault(size = 10) Pageable paginacion) {
+
+        var response = topicoService.listarTopicos(paginacion);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    // Listar solo un tópico con la id proporcionada
+    // Listar solo un tópico con la id proporcionada, permitido a todos los perfiles
     public ResponseEntity<DatosRespuestaTopico> retornaDatosTopico(@PathVariable Long id) {
-        Topico topico = topicoRepository.getReferenceById(id);
-        var datosTopico = new DatosRespuestaTopico(topico);
-        return ResponseEntity.ok(datosTopico);
+
+        var response = topicoService.listarUnTopico(id);
+        return ResponseEntity.ok(response);
     }
 
-    @PutMapping ("/{id}")
+    @PutMapping
     @Transactional
-    public ResponseEntity actualizarTopico(@RequestBody @Valid DatosActualizarTopico datosActualizarTopico) {
-        Topico topico = topicoRepository.getReferenceById(datosActualizarTopico.id());
-        topico.actualizarDatos(datosActualizarTopico);
-        return ResponseEntity.ok(new DatosRespuestaTopico(topico));
+    // Actualizar tópico, se puede: titulo, mensaje, estatus, curso
+    // Permitido al administrador, al moderador y al usuario solo si es autor del tópico
+    public ResponseEntity actualizarTopico(
+            @RequestBody @Valid DatosActualizarTopico datosActualizarTopico) {
+
+        var response = topicoService.actualizarTopico(datosActualizarTopico);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
+    // Eliminar un tópico
+    // Permitido al administrador, al moderador y al usuario solo si es autor del tópico
     public ResponseEntity eliminarTopico(@PathVariable Long id){
-        Topico topico = topicoRepository.getReferenceById(id);
-        topicoRepository.delete(topico);
+
+        topicoService.eliminarTopico(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }
 
