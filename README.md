@@ -5,61 +5,15 @@
 Esta aplicación API de back-end realiza las actividades en un foro. Te permite suscribirte con tu nombre, email y contraseña y después usar el foro en la forma comun.
 
 ## Descripción del proyecto
-Esta aplicación se realizó como parte de la formación en Oracle Next Eucation (ONE) y Alura Latam, usando Spring Boot, MySQL y Security de Spring.
+Esta aplicación se realizó como parte de la formación en Oracle Next Eucation (ONE) y Alura Latam, usando Spring Boot, MySQL y Security usando la forma STATELESS de autenticación con JWT (JSON Web Token).
 
-Ofrece las opciones de CRUD para los tópicos del foro:
-
-- Registro de tópicos y guardarlos en la base de datos topicos
-- Listar los tópicos que están en la base de datos
-- Mostrar los datos de un tópico seleccionado
-- Modificar el tópico seleccionado
-- Eliminar el tópico seleccionado de la base de datos
-
-y todo esto únicamente con el acceso autorizado
-- usando la forma STATELESS de autenticación con JWT (JSON Web Token)
+La documentación se preparó con Swagger y se puede realizar cuando activas el programa.
 
 
-## Organización de código
+### Diagrama de base de datos MySQL
 
-### Organización de los paquetes y archivos de código
+<img src="diagrama_base_de_datos_forohub.png" alt="diagrama de base de datos" style="width: 70%;">
 
-main
-
-    -java
-        - controller
-            - AutenticacionController
-            - TopicoController
-        - domain
-            - topico
-                - Curso
-                - DatosActualizarTopico
-                - DatosListadoTopico
-                - DatosRegistroTopico
-                - DatosRespuestaTopico
-                - Estatus
-                - Topico
-                - TopicoRepository
-            - usuario
-                - DatosAutenticacionUsuario
-                - Usuario
-                - UsuarioRepository
-        - infra
-            - errores
-                - TratadorDeErrores
-            - security
-                - AutenticacionService
-                - DatosJWTToken
-                - SecurityConfigurations
-                - SecurityFilter
-                - TokenService
-        - ForohubApplication
-
-    - resources
-        - db.migration
-            - V1__create-table-topicos.sql
-            - V2__create-table-usuarios.sql
-        - application.properties
-pom.xml        
 
 ### Dependencias usadas (el archivo pom.xml)
 - pring-boot-starter-web:3.0.2
@@ -73,21 +27,10 @@ pom.xml
 - spring-boot-starter-validation:3.0.2
 - spring-boot-starter-security:3.0.2
 - java-jwt:4.2.1
-
-### Base de datos MySQL
-
-Se usan 2 tablas:
-- topicos
-- usuarios
-
-## Organización en la forma gráfica
-
-![UML del proyecto](presentacion_grafica.png)
+- springdoc-openapi-starter-webmvc-ui
 
 
-
-## Cómo usar la aplicación
-Para probar o usar la aplicación se requeiere seguir los siguientes pasos:
+## Visualizar la documentación y usar la aplicación
 
 1. Descarga todos los archivos y carpetas en una carpeta en tu computadora.
     - esto puedes hacer usando la consola o precionando boton verde "Code" en el repositorio de GitHub y escoges Download ZIP
@@ -98,7 +41,7 @@ Para probar o usar la aplicación se requeiere seguir los siguientes pasos:
 
 4. Define las siguientes variables de entorno en tu sistema operativo (Windows o Mac):
     - SQL_USERNAME --> tu username para entrar en MySQL 
-    - SQL_PASSWORD --> tu username para entrar en MySQL
+    - SQL_PASSWORD --> tu contraseña para entrar en MySQL
     - JWT_SECRET --> tu password para la autorización con JWT
 
     Si el complilador no acepta las variables, defínelas también en IntelliJ (Run/Edit Configurations/Environment variables)
@@ -107,18 +50,16 @@ Para probar o usar la aplicación se requeiere seguir los siguientes pasos:
 
 5. Run la clase DesafioLiteraluraApplication. 
 
-6. Con primer run se te construyeron las dos tablas en la base de datos. Ingresa en la tabla usuarios un nombre (login) y tu password que definiste en JWT_SECRET, encriptado. Lo encriptas con la encriptación Bcrypt en internet.
+6. Con primer run se te construyeron las dos tablas en la base de datos. 
+
+7. Ahora puedes visualizar la documentación
+    - en http://localhost:8080/v3/api-docs puedes ver el sistema del código
+    - en http://localhost:8080/swagger-ui/index.html se te presentan todos los CRUDs y formatos de datos
 
 7. Descarga un cliente de API, te recomiendo Insomnia.
 
-8. En Insomnia puedes realizar las actividades mencionadas:
-    - POST http://localhost:8080/login (autenticación y autorización con el login y clave que incluiste en la base de datos en la tabla usuarios). Cópia el JWT que te lo regresa el sistema y pégalo a todas otras actividades en la parte Auth/Bearer token.
-    - POST http://localhost:8080/topicos (Registro de un tópico)
-    - GET http://localhost:8080/topicos Listar los tópicos que están en la base de datos.
-    - GET http://localhost:8080/topicos/{id} Mostrar los datos de tópico con "id" (pones número)
-    - PUT http://localhost:8080/topicos/{id} Modificar el tópico con "id" (pones número)
-    - DEL http://localhost:8080/topicos/2 Eliminar el tópico con "id" (pones número) de la base de datos
-
+8. En Insomnia puedes realizar las actividades mencionadas en swagger
+    
 
 ## Tecnologías usadas
 - Java SE17
@@ -126,12 +67,12 @@ Para probar o usar la aplicación se requeiere seguir los siguientes pasos:
 - IDE IntelliJ
 - Cliente de API Insomnia
 - MySQL de Oracle
-- lucidchart.com para presentación gráfica
+- OpenAPI swagger
 - Editor de Visual Studio Code para este README
 
+
 ## Estado del proyecto
-El proyecto está terminado en el nivel básico.
-Están abiertas varias opciones para aumentarlo y hacer el foro completo.
+El proyecto está terminado.
 
 ## Licencia
 GNU General Public License v3.0
