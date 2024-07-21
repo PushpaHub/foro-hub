@@ -30,7 +30,7 @@ La documentación se preparó con Swagger y se puede realizar cuando activas el 
 - springdoc-openapi-starter-webmvc-ui
 
 
-## Visualizar la documentación y usar la aplicación
+## Visualizar la documentación y probar la aplicación
 
 1. Descarga todos los archivos y carpetas en una carpeta en tu computadora.
     - esto puedes hacer usando la consola o precionando boton verde "Code" en el repositorio de GitHub y escoges Download ZIP
@@ -54,18 +54,26 @@ La documentación se preparó con Swagger y se puede realizar cuando activas el 
 
 7. Ahora puedes visualizar la documentación
     - en http://localhost:8080/v3/api-docs puedes ver el sistema del código
-    - en http://localhost:8080/swagger-ui/index.html se te presentan todos los CRUDs y formatos de datos
+    - en http://localhost:8080/swagger-ui/index.html se te presentan todos los CRUDs y formatos de datos. 
 
-7. Descarga un cliente de API, te recomiendo Insomnia.
+7. Para iniciar necesitas incluir un administrador directamente en la base de datos. Puedes usar IDE de WorkBench o la linea de comandos.Te recomiendo este proceso:
 
-8. En Insomnia puedes realizar las actividades mencionadas en swagger
+    - En la tabla perfiles incluye dos perfiles básicos:
+        - USUARIO
+        - ADMINISTRADOR
+
+    - En el swagger-ui/index.html haz POST en usuarios/inscripción. Ingresa nombre, login (email) y clave (contraseña). El primer usuario se va a inscribir en la tabla usuarios.
+
+    - anexa a este usuario el perfol ADMINISTRADOR en WorkBench - en la tabla usuario_roles anexa una linea con el id del usuario y el id de perfil ADMINISTRADOR.
+
+
+8. Ahora puedes examinar todas las posibilidades en swagger. Para casi todas las opciones necesitas registrarte en login y obtener to JWT que lo copias en la parte superior en el botón authorize.
     
 
 ## Tecnologías usadas
 - Java SE17
 - Spring Boot v.3.0.2
 - IDE IntelliJ
-- Cliente de API Insomnia
 - MySQL de Oracle
 - OpenAPI swagger
 - Editor de Visual Studio Code para este README
