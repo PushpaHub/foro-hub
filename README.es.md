@@ -1,8 +1,9 @@
-# Foro hub
+# Foro hub 
+[Read in English](README.en.md) | [Leer en Español](README.es.md)
 
- <img src="Portada.jpg" alt="Imagen de portada - cubitos con las letras portada" style="width: 100%;">
+ <img src="Portada.jpg" alt="Imagen de portada - cubitos con las letras forum" style="width: 100%;">
 
-Esta aplicación API de back-end realiza las actividades en un foro. Te permite suscribirte con tu nombre, email y contraseña y después usar el foro en la forma comun.
+Esta aplicación API REST de back-end realiza las actividades en un foro. Te permite suscribirte con tu nombre, email y contraseña y después usar el foro en la forma comun.
 
 ## Descripción del proyecto
 Esta aplicación se realizó como parte de la formación en Oracle Next Eucation (ONE) y Alura Latam, usando Spring Boot, MySQL y Security usando la forma STATELESS de autenticación con JWT (JSON Web Token).
@@ -48,24 +49,32 @@ La documentación se preparó con Swagger y se puede realizar cuando activas el 
 
     El programa se ejecutará en localhost:8080.
 
-5. Run la clase DesafioLiteraluraApplication. 
+5. Run la clase ForohubApplication. 
 
-6. Con primer run se te construyeron las dos tablas en la base de datos. 
+6. Con el primer run se te construyeron las seis tablas en la base de datos. 
 
 7. Ahora puedes visualizar la documentación
     - en http://localhost:8080/v3/api-docs puedes ver el sistema del código
     - en http://localhost:8080/swagger-ui/index.html se te presentan todos los CRUDs y formatos de datos
 
-7. Descarga un cliente de API, te recomiendo Insomnia.
+8. Para iniciar necesitas incluir un administrador directamente en la base de datos. Puedes usar IDE de WorkBench o la linea de comandos.Te recomiendo este proceso:
 
-8. En Insomnia puedes realizar las actividades mencionadas en swagger
+    - En la tabla perfiles incluye dos perfiles básicos:
+        - USUARIO
+        - ADMINISTRADOR
+
+    - En el swagger-ui/index.html haz POST en usuarios/inscripción. Ingresa nombre, login (email) y clave (contraseña). El primer usuario se va a inscribir en la tabla usuarios.
+
+    - anexa a este usuario el perfol ADMINISTRADOR en WorkBench - en la tabla usuario_roles anexa una linea con el id del usuario y el id de perfil ADMINISTRADOR.
+
+
+9. Ahora puedes examinar todas las posibilidades en swagger. Para casi todas las opciones necesitas registrarte en login y obtener to JWT que lo copias en la parte superior en el botón authorize.
     
 
 ## Tecnologías usadas
 - Java SE17
 - Spring Boot v.3.0.2
 - IDE IntelliJ
-- Cliente de API Insomnia
 - MySQL de Oracle
 - OpenAPI swagger
 - Editor de Visual Studio Code para este README
