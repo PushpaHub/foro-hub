@@ -31,7 +31,7 @@ La documentación se preparó con Swagger y se puede realizar cuando activas el 
 - springdoc-openapi-starter-webmvc-ui
 
 
-## Visualizar la documentación y usar la aplicación
+## Visualizar la documentación y probar la aplicación
 
 1. Descarga todos los archivos y carpetas en una carpeta en tu computadora.
     - esto puedes hacer usando la consola o precionando boton verde "Code" en el repositorio de GitHub y escoges Download ZIP
@@ -55,7 +55,7 @@ La documentación se preparó con Swagger y se puede realizar cuando activas el 
 
 7. Ahora puedes visualizar la documentación
     - en http://localhost:8080/v3/api-docs puedes ver el sistema del código
-    - en http://localhost:8080/swagger-ui/index.html se te presentan todos los CRUDs y formatos de datos
+    - en http://localhost:8080/swagger-ui/index.html se te presentan todos los CRUDs y formatos de datos. 
 
 8. Para iniciar necesitas incluir un administrador directamente en la base de datos. Puedes usar IDE de WorkBench o la linea de comandos.Te recomiendo este proceso:
 
